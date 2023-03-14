@@ -30,10 +30,7 @@ include_once("header.php");
                 $result = mysqli_query($connection, $query);
                 echo "<div class='container'><table width='' class='table table-bordered' border='1' >
                             <tr>
-                                <th>Faculty</th>
-								<th>Course</th>
-                                <th>Subject</th>
-								<th>Room</th>
+                                <th>Staff</th>
 								<th>Start time</th>
 								<th>End time</th>
                                 <th>Action</th>
@@ -41,11 +38,11 @@ include_once("header.php");
                 while ($row = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>" . $row['faculty'] . "</td>";
+                    echo "<td>" . $row['start_time'] . "</td>";
+                    echo "<td>" . $row['end_time'] . "</td>";
                     echo "<td>" . $row['course'] . "</td>";
                     echo "<td>" . $row['subject'] . "</td>";
                     echo "<td>" . $row['room'] . "</td>";
-                    echo "<td>" . $row['start_time'] . "</td>";
-                    echo "<td>" . $row['end_time'] . "</td>";
                     echo "<td><form class='form-horizontal' method='post' action='tablelist.php'>
                         <input name='id' type='hidden' value='" . $row['id'] . "';>
                         <input type='submit' class='btn btn-danger' name='delete' value='Delete'>

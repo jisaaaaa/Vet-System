@@ -2,13 +2,10 @@
 $path = $_SERVER['DOCUMENT_ROOT'];
 $path .= "header.php";
 include_once("header.php");
-include_once("navbar.php");
 ?>
 <html>
 
 <body>
-
-	<br>
 	<div class="container">
 		<div class="row" align="center">
 			<div class="col-lg-6">
@@ -57,5 +54,4 @@ include_once("navbar.php");
 			$path = $_SERVER['DOCUMENT_ROOT'];
 			$path .= "footer.php";
 			include_once("footer.php");
-			include_once("navbar.php");
 			?>

@@ -1,6 +1,5 @@
 <?php
 include_once("header.php");
-include_once("navbar.php");
 ?>
 <html>
 
@@ -50,7 +49,7 @@ include_once("navbar.php");
       $result = mysqli_query($connection, $query);
       echo "<div class='container'><table width='' class='table table-bordered' border='1' >
                             <tr>
-                                <th>Faculty</th>
+                                <th>Staff</th>
                                 <th>Designation</th>
                                  <th>Action</th>
                             </tr>";
