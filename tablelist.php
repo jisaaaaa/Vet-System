@@ -40,9 +40,6 @@ include_once("header.php");
                     echo "<td>" . $row['faculty'] . "</td>";
                     echo "<td>" . $row['start_time'] . "</td>";
                     echo "<td>" . $row['end_time'] . "</td>";
-                    echo "<td>" . $row['course'] . "</td>";
-                    echo "<td>" . $row['subject'] . "</td>";
-                    echo "<td>" . $row['room'] . "</td>";
                     echo "<td><form class='form-horizontal' method='post' action='tablelist.php'>
                         <input name='id' type='hidden' value='" . $row['id'] . "';>
                         <input type='submit' class='btn btn-danger' name='delete' value='Delete'>

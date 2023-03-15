@@ -68,6 +68,7 @@ include_once("header.php");
       echo "</td>           
         </tr>";
 
+
       // delete record
       if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo '<script type="text/javascript">
@@ -76,8 +77,8 @@ include_once("header.php");
                            </script>';
       }
       if (isset($_POST['faculty_id'])) {
-        $faculty_id = mysql_real_escape_string($_POST['faculty_id']);
-        $sql = mysql_query("DELETE FROM faculty WHERE faculty_id='$faculty_id'");
+        $faculty_id = mysqli_real_escape_string($_POST['faculty_id']);
+        $sql = mysqli_query("DELETE FROM faculty WHERE faculty_id='$faculty_id'");
         if (!$sql) {
           echo ("Could not delete rows" . mysqli_error());
         }

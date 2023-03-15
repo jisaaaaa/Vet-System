@@ -38,7 +38,7 @@ include_once("header.php");
 							<div class="form-group" align="right">
 								<label class="col-md-4 control-label" for="submit"></label>
 								<div class="col-md-5">
-									<button id="submit" name="submit" class="btn btn-primary">Add Faculty</button>
+									<button id="submit" name="submit" class="btn btn-primary">Add Staff</button>
 								</div>
 							</div>
 

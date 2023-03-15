@@ -28,7 +28,7 @@ if (isset($_POST['insert'])) {
                          window.location="home.php";
                            </script>';
   } else {
-    $insert_Query = "INSERT INTO `addtable` (`faculty`, `course`, `subject`, `room`, `start_time`, `end_time`) VALUES ('$data[0]', '$data[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]')";
+    $insert_Query = "INSERT INTO `addtable` (`faculty`, `start_time`, `end_time`) VALUES ('$data[0]', '$data[1]', '$data[2]')";
     $insert_Result = mysqli_query($con, $insert_Query);
 
     if ($insert_Result) {

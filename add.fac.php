@@ -23,10 +23,7 @@
  else 
  {
 	 echo '<script type="text/javascript">
-                      alert("New Faculty Added!");
+                      alert("New Staff Added!");
                          location="home.php";
                            </script>';
  }
-
-
-?>
