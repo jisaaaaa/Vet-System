@@ -70,18 +70,16 @@ include_once("header.php");
 
 
       // delete record
+
       if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo '<script type="text/javascript">
-                      alert("row Successfuly Deleted");
+                      alert("Staff Name Successfuly Deleted");
                          location="list.php";
                            </script>';
       }
       if (isset($_POST['faculty_id'])) {
-        $faculty_id = mysqli_real_escape_string($_POST['faculty_id']);
-        $sql = mysqli_query("DELETE FROM faculty WHERE faculty_id='$faculty_id'");
-        if (!$sql) {
-          echo ("Could not delete rows" . mysqli_error());
-        }
+        $faculty_id = $_POST['faculty_id'];
+        $sql = mysqli_query($connection, "DELETE FROM faculty WHERE faculty_id='$faculty_id'");
       }
       ?>
       </fieldset>

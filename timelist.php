@@ -70,16 +70,13 @@ include_once("header.php");
             // delete record
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 echo '<script type="text/javascript">
-                      alert("Schedule Successfuly Deleted");
-                         location="tablelist.php";
+                      alert("Time Successfuly Deleted");
+                         location="list.php";
                            </script>';
             }
             if (isset($_POST['id'])) {
-                $id = mysql_real_escape_string($_POST['id']);
-                $sql = mysql_query("DELETE FROM timer WHERE id='$id'");
-                if (!$sql) {
-                    echo ("Could not delete rows" . mysql_error());
-                }
+                $id = $_POST['id'];
+                $sql = mysqli_query($connection, "DELETE FROM timer WHERE id='$id'");
             }
             ?>
             </fieldset>

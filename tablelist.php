@@ -59,11 +59,8 @@ include_once("header.php");
                            </script>';
                 }
                 if (isset($_POST['id'])) {
-                    $id = mysql_real_escape_string($_POST['id']);
-                    $sql = mysql_query("DELETE FROM addtable WHERE id='$id'");
-                    if (!$sql) {
-                        echo ("Could not delete rows" . mysql_error());
-                    }
+                    $id = $_POST['id'];
+                    $sql = mysqli_query($connection, "DELETE FROM addtable WHERE id='$id'");
                 }
                 ?>
         </fieldset>
