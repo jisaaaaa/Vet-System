@@ -38,9 +38,9 @@ include_once("header.php");
 
 <head>
     <style>
-        body {
-            background-color: white;
-        }
+    body {
+        background-color: white;
+    }
     </style>
 </head>
 
@@ -132,7 +132,7 @@ while ($row2 = mysqli_fetch_array($result2)) {
     <body>
         <?php while ($row2 = mysqli_fetch_array($result2)) :; ?>
 
-            <option value="<?php echo $row2[0]; ?>"><?php echo $row2[2]; ?></option>
+        <option value="<?php echo $row2[0]; ?>"><?php echo $row2[2]; ?></option>
 
         <?php endwhile; ?>
 
@@ -188,7 +188,7 @@ while ($row2 = mysqli_fetch_array($result2)) {
             <body>
                 <?php while ($row2 = mysqli_fetch_array($result2)) :; ?>
 
-                    <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
+                <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
 
 
                 <?php endwhile; ?>
@@ -262,7 +262,7 @@ while ($row2 = mysqli_fetch_array($result2)) {
 
                                     <?php while ($row2 = mysqli_fetch_array($result2)) :; ?>
 
-                                        <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
+                                    <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
 
 
                                     <?php endwhile; ?>
@@ -336,7 +336,7 @@ while ($row2 = mysqli_fetch_array($result2)) {
 
                     <?php while ($row2 = mysqli_fetch_array($result2)) :; ?>
 
-                        <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
+                    <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
 
                     <?php endwhile; ?>
 
