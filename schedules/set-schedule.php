@@ -1,125 +1,128 @@
 <?php
 include './config/connection.php';
 include './common_service/common_functions.php';
-include './config/site_js_links.php';
+
 $message = '';
 
+if (isset($_POST['submit'])) {
+
+  $patientId = $_POST['patient'];
+  $visitDate = $_POST['visit_date'];
+  $nextVisitDate = $_POST['next_visit_date'];
+  $bp = $_POST['bp'];
+  $weight = $_POST['weight'];
+  $disease = $_POST['disease'];
+
+  $medicineDetailIds = $_POST['medicineDetailIds'];
+
+  $quantities = $_POST['quantities'];
+  $dosages = $_POST['dosages'];
+
+  $visitDateArr = explode("/", $visitDate);
+
+  $visitDate = $visitDateArr[2] . '-' . $visitDateArr[0] . '-' . $visitDateArr[1];
+
+  if ($nextVisitDate != '') {
+    $nextVisitDateArr = explode("/", $nextVisitDate);
+    $nextVisitDate = $nextVisitDateArr[2] . '-' . $nextVisitDateArr[0] . '-' . $nextVisitDateArr[1];
+  }
 
 
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$databaseName = "insertion";
+  try {
 
+    $con->beginTransaction();
 
-$connect = mysqli_connect($hostname, $username, $password, $databaseName);
+    //first to store a row in patient visit
 
-$query = "SELECT * FROM `course`";
-$query = "SELECT * FROM `rooms`";
-$query = "SELECT * FROM `subject`";
-$query = "SELECT * FROM `faculty`";
+    $queryVisit = "INSERT INTO `patient_visits`(`visit_date`, 
+    `next_visit_date`, `bp`, `weight`, `disease`, `patient_id`) 
+    VALUES('$visitDate', 
+    nullif('$nextVisitDate', ''), 
+    '$bp', '$weight', '$disease', $patientId);";
+    $stmtVisit = $con->prepare($queryVisit);
+    $stmtVisit->execute();
 
-$result1 = mysqli_query($connect, $query);
-$result2 = mysqli_query($connect, $query);
+    $lastInsertId = $con->lastInsertId(); //latest patient visit id
 
-$options = "";
+    //now to store data in medication history
+    $size = sizeof($medicineDetailIds);
+    $curMedicineDetailId = 0;
+    $curQuantity = 0;
+    $curDosage = 0;
 
-while ($row2 = mysqli_fetch_array($result2)) {
-    $options = $options . "<option>$row2[1]</option>";
+    for ($i = 0; $i < $size; $i++) {
+      $curMedicineDetailId = $medicineDetailIds[$i];
+      $curQuantity = $quantities[$i];
+      $curDosage = $dosages[$i];
+
+      $qeuryMedicationHistory = "INSERT INTO `patient_medication_history`(
+      `patient_visit_id`,
+      `medicine_details_id`, `quantity`, `dosage`)
+      VALUES($lastInsertId, $curMedicineDetailId, $curQuantity, $curDosage);";
+      $stmtDetails = $con->prepare($qeuryMedicationHistory);
+      $stmtDetails->execute();
+    }
+
+    $con->commit();
+
+    $message = 'Patient Medication stored successfully.';
+  } catch (PDOException $ex) {
+    $con->rollback();
+
+    echo $ex->getTraceAsString();
+    echo $ex->getMessage();
+    exit;
+  }
+
+  header("location:congratulation.php?goto_page=new_prescription.php&message=$message");
+  exit;
 }
+$patients = getPatients($con);
+$medicines = getMedicines($con);
 
-while ($row2 = mysqli_fetch_array($result2)) {
-    $options = $options . "<option>$row2[2]</option>";
-}
-
-
-// $path = $_SERVER['DOCUMENT_ROOT'];
-// $path .= "header.php";
-// include_once("header.php");
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include './config/site_css_links.php' ?>
 
-    <head>
-        <?php include './config/site_css_links.php' ?>
-        <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-        <title>Set Schedule - VET Clinical Information System in PHP</title>
+    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <title>Set Schedules</title>
 
-    </head>
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed">
     <div class="wrapper">
 
-        <?php include './config/sidebar.php' ?>
-
-
-        <?php while ($row2 = mysqli_fetch_array($result2)) :; ?>
-        <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
-        <option value="<?php echo $row2[0]; ?>"><?php echo $row2[2]; ?></option>
-        <?php endwhile; ?>
-
-
-
-
+        <?php include './config/header.php';
+        include './config/sidebar.php'; ?>
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Set Schedule</h1>
+                            <h1>Test</h1>
                         </div>
                     </div>
-                </div>
-
             </section>
+
             <section class="content">
 
-                <!-- Default box -->
                 <div class="card card-outline card-primary rounded-0 shadow">
                     <div class="card-header">
-                        <h3 class="card-title">Add New Schedule</h3>
-
+                        <h3 class="card-title">Add New Prescription</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
                         </div>
-
-
                     </div>
-
                     <div class="card-body">
-                        <!-- best practices-->
                         <form method="post">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="faculty">Staff</label>
-                                <div class="col-md-5">
-                                    <select id="faculty" name="faculty" class="form-control">
-                                        <?php echo $options; ?>
-                                    </select>
-                                </div>
-                            </div>
-
-
-
-
-
-
-
                             <div class="row">
-                                <h1>test</h1>
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <label>Staff</label>
+                                    <label>Select Patient</label>
                                     <select id="patient" name="patient" class="form-control form-control-sm rounded-0"
                                         required="required">
                                         <?php echo $patients; ?>
@@ -268,25 +271,125 @@ while ($row2 = mysqli_fetch_array($result2)) {
                 <!-- /.card -->
 
             </section>
+            <!-- /.content -->
         </div>
+        <!-- /.content-wrapper -->
+
+
+        <!-- /.control-sidebar -->
     </div>
+    <!-- ./wrapper -->
 
-
-
-
-
-
-
-
-
-
-
-
+    <?php include './config/site_js_links.php';
+  ?>
 
     <script src="plugins/moment/moment.min.js"></script>
     <script src="plugins/daterangepicker/daterangepicker.js"></script>
     <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 
+
+
+    <script>
+    var serial = 1;
+    showMenuSelected("#mnu_patients", "#mi_new_prescription");
+
+    var message = '<?php echo $message; ?>';
+
+    if (message !== '') {
+        showCustomMessage(message);
+    }
+
+
+    $(document).ready(function() {
+
+        $('#medication_list').find('td').addClass("px-2 py-1 align-middle")
+        $('#medication_list').find('th').addClass("p-1 align-middle")
+        $('#visit_date, #next_visit_date').datetimepicker({
+            format: 'L'
+        });
+
+
+        $("#medicine").change(function() {
+
+            // var medicineId = $("#medicine").val();
+            var medicineId = $(this).val();
+
+            if (medicineId !== '') {
+                $.ajax({
+                    url: "ajax/get_packings.php",
+                    type: 'GET',
+                    data: {
+                        'medicine_id': medicineId
+                    },
+                    cache: false,
+                    async: false,
+                    success: function(data, status, xhr) {
+                        $("#packing").html(data);
+                    },
+                    error: function(jqXhr, textStatus, errorMessage) {
+                        showCustomMessage(errorMessage);
+                    }
+                });
+            }
+        });
+
+
+        $("#add_to_list").click(function() {
+            var medicineId = $("#medicine").val();
+            var medicineName = $("#medicine option:selected").text();
+
+            var medicineDetailId = $("#packing").val();
+            var packing = $("#packing option:selected").text();
+
+            var quantity = $("#quantity").val().trim();
+            var dosage = $("#dosage").val().trim();
+
+            var oldData = $("#current_medicines_list").html();
+
+            if (medicineName !== '' && packing !== '' && quantity !== '' && dosage !== '') {
+                var inputs = '';
+                inputs = inputs + '<input type="hidden" name="medicineDetailIds[]" value="' +
+                    medicineDetailId + '" />';
+                inputs = inputs + '<input type="hidden" name="quantities[]" value="' + quantity +
+                    '" />';
+                inputs = inputs + '<input type="hidden" name="dosages[]" value="' + dosage + '" />';
+
+
+                var tr = '<tr>';
+                tr = tr + '<td class="px-2 py-1 align-middle">' + serial + '</td>';
+                tr = tr + '<td class="px-2 py-1 align-middle">' + medicineName + '</td>';
+                tr = tr + '<td class="px-2 py-1 align-middle">' + packing + '</td>';
+                tr = tr + '<td class="px-2 py-1 align-middle">' + quantity + '</td>';
+                tr = tr + '<td class="px-2 py-1 align-middle">' + dosage + inputs + '</td>';
+
+                tr = tr +
+                    '<td class="px-2 py-1 align-middle text-center"><button type="button" class="btn btn-outline-danger btn-sm rounded-0" onclick="deleteCurrentRow(this);"><i class="fa fa-times"></i></button></td>';
+                tr = tr + '</tr>';
+                oldData = oldData + tr;
+                serial++;
+
+                $("#current_medicines_list").html(oldData);
+
+                $("#medicine").val('');
+                $("#packing").val('');
+                $("#quantity").val('');
+                $("#dosage").val('');
+
+            } else {
+                showCustomMessage('Please fill all fields.');
+            }
+
+        });
+
+    });
+
+    function deleteCurrentRow(obj) {
+
+        var rowIndex = obj.parentNode.parentNode.rowIndex;
+
+        document.getElementById("medication_list").deleteRow(rowIndex);
+    }
+    </script>
 </body>
 
 </html>

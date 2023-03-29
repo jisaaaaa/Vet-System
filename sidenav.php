@@ -149,7 +149,29 @@ if (!(isset($_SESSION['user_id']))) {
 
 
 
-
+                <li class="nav-item" id="mnu_schedules">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>
+                            Schedules
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="medicines.php" class="nav-link" id="mi_set_schedules">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Set Schedules</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="medicine_details.php" class="nav-link" id="mi_add_schedules">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add Schedules</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
                 <li class="nav-item" id="mnu_reports">
                     <a href="#" class="nav-link">
