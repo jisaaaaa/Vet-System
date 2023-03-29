@@ -16,7 +16,7 @@ include './config/site_css_links.php'
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <title>Add Staff - VET Clinical Information System in PHP</title>
+    <title>Add Time - VET Clinical Information System in PHP</title>
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed">
