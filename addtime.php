@@ -20,7 +20,8 @@ include './config/site_css_links.php'
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed">
-    <?php include './config/sidebar.php' ?>
+    <?php include './config/sidebar.php';
+    include './config/header.php'; ?>
     <div class="wrapper">
         <div class="content-wrapper">
             <section class="content-header">
@@ -42,8 +43,7 @@ include './config/site_css_links.php'
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="starttime">Start time</label>
                                     <div class="col-md-5">
-                                        <input id="starttime" name="starttime" type="text" placeholder=""
-                                            class="form-control input-md" required="">
+                                        <input id="starttime" name="starttime" type="text" placeholder="" class="form-control input-md" required="">
 
                                     </div>
                                 </div>
@@ -51,8 +51,7 @@ include './config/site_css_links.php'
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="endtime">End time</label>
                                     <div class="col-md-5">
-                                        <input id="endtime" name="endtime" type="text" placeholder=""
-                                            class="form-control input-md" required="">
+                                        <input id="endtime" name="endtime" type="text" placeholder="" class="form-control input-md" required="">
 
                                     </div>
                                 </div>
@@ -63,7 +62,7 @@ include './config/site_css_links.php'
                                 <div class="form-group" align="right">
                                     <label class="col-md-4 control-label" for="submit"></label>
                                     <div class="col-md-5">
-                                        <button id="submit" name="submit" class="btn btn-success">Add Time</button>
+                                        <button id="submit" name="submit" class="btn btn-primary">Add Time</button>
                                     </div>
                                 </div>
 

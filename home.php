@@ -3,22 +3,20 @@ include './config/connection.php';
 include './common_service/common_functions.php';
 include './config/site_js_links.php';
 
-
+// select option value from database
 
 $hostname = "localhost";
 $username = "root";
 $password = "";
 $databaseName = "insertion";
 
+//connect to mysql database
 
 $connect = mysqli_connect($hostname, $username, $password, $databaseName);
 
-$query = "SELECT * FROM `course`";
-$query = "SELECT * FROM `rooms`";
-$query = "SELECT * FROM `subject`";
+// mysql select query
 $query = "SELECT * FROM `faculty`";
-
-$result1 = mysqli_query($connect, $query);
+// for method staff
 $result2 = mysqli_query($connect, $query);
 
 $options = "";
@@ -26,17 +24,7 @@ $options = "";
 while ($row2 = mysqli_fetch_array($result2)) {
     $options = $options . "<option>$row2[1]</option>";
 }
-
-while ($row2 = mysqli_fetch_array($result2)) {
-    $options = $options . "<option>$row2[2]</option>";
-}
-
-
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,14 +38,9 @@ while ($row2 = mysqli_fetch_array($result2)) {
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed">
-    <?php include './config/sidebar.php' ?>
+    <?php include './config/sidebar.php';
+    include './config/header.php'; ?>
     <div class="wrapper">
-        <?php while ($row2 = mysqli_fetch_array($result2)) :; ?>
-        <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
-        <option value="<?php echo $row2[0]; ?>"><?php echo $row2[2]; ?></option>
-        <?php endwhile; ?>
-
-
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
@@ -82,99 +65,109 @@ while ($row2 = mysqli_fetch_array($result2)) {
                     </div>
 
                     <div class="card-body">
-                        <form method="post">
+                        <form method="post" action="add.home.php">
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="faculty">Staff</label>
+                                <label class="col-md-4 control-label" for="faculty">Staff Name</label>
                                 <div class="col-md-5">
-                                    <select id="faculty" name="faculty" class="form-control">
+                                    <select id="faculty" name="faculty" class="form-control" required>
                                         <?php echo $options; ?>
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="start_time">Start time</label>
-                                <div class="col-md-5">
-                                    <select id="start_time" name="start_time" class="form-control">
-                                        <?php echo $options; ?>
-
-
-                                        <?php while ($row2 = mysqli_fetch_array($result2)) :; ?>
-                                        <option value="<?php echo $row1[0]; ?>"><?php echo $row1[2]; ?></option>
-
-                                        <?php endwhile; ?>
-
-                                    </select>
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="end_time">End time</label>
-                                <div class="col-md-5">
-                                    <select id="end_time" name="end_time" class="form-control">
-                                        <?php echo $options; ?>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="clearfix">&nbsp;</div>
-                            <div class="row">
-                                <div class="col-md-10">&nbsp;</div>
-                                <div class="col-md-2">
-                                    <button type="submit" id="submit" name="submit"
-                                        class="btn btn-primary btn-sm btn-flat btn-block">Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 </body>
 
 </html>
-
-
-
-
-
-
 <?php
 
+// php select option value from database
 
 $hostname = "localhost";
 $username = "root";
 $password = "";
 $databaseName = "insertion";
 
+// connect to mysql database
 
 $connect = mysqli_connect($hostname, $username, $password, $databaseName);
 
-$query = "SELECT * FROM `rooms`";
+$query = "SELECT * FROM `timer`";
+$result2 = mysqli_query($connect, $query);
 
+
+$options = "";
+
+while ($row2 = mysqli_fetch_array($result2)) {
+    $options = $options . "<option>$row2[1]</option>";
+}
+
+
+?>
+
+
+
+<html>
+
+<head>
+</head>
+
+<body>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+
+    <body>
+
+
+
+        <!--Method One-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="start_time">Start time</label>
+            <div class="col-md-5">
+                <select id="start_time" name="start_time" class="form-control" required>
+                    <?php echo $options; ?>
+
+
+                    <?php while ($row2 = mysqli_fetch_array($result2)) :; ?>
+
+                        <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
+
+
+                    <?php endwhile; ?>
+
+                </select>
+
+            </div>
+        </div>
+    </body>
+    </head>
+
+</html>
+
+
+<?php
+
+// php select option value from database
+
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$databaseName = "insertion";
+
+// connect to mysql database
+
+$connect = mysqli_connect($hostname, $username, $password, $databaseName);
+
+// mysql select query
+$query = "SELECT * FROM `timer`";
+
+// for method 1
 
 $result1 = mysqli_query($connect, $query);
 
-$query = "SELECT * FROM `subject`";
+// for method 2
+$query = "SELECT * FROM `timer`";
 $result2 = mysqli_query($connect, $query);
 
 
@@ -185,3 +178,58 @@ while ($row2 = mysqli_fetch_array($result2)) {
 }
 
 ?>
+
+
+
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+    <!-- Method Two -->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="end_time">End time</label>
+        <div class="col-md-5">
+            <select id="end_time" name="end_time" class="form-control" required>
+                <?php echo $options; ?>
+            </select>
+        </div>
+    </div>
+
+
+
+    <?php while ($row2 = mysqli_fetch_array($result2)) :; ?>
+
+        <option value="<?php echo $row2[0]; ?>"><?php echo $row2[1]; ?></option>
+
+    <?php endwhile; ?>
+
+    </select>
+    <!-- Button -->
+    <div class="form-group" align="right">
+        <label class="col-md-4 control-label" for="submit"></label>
+        <div class="col-md-5">
+            <button id="submit" name="insert" class="btn btn-primary"> Set </button>
+        </div>
+    </div>
+
+
+    </fieldset>
+    </form>
+
+    </div>
+    </div>
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+</body>
+
+
+</head>
+
+</html>

@@ -2,9 +2,8 @@
 include './config/connection.php';
 include './common_service/common_functions.php';
 include './config/site_js_links.php';
-include './config/site_css_links.php'
+include './config/site_css_links.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,8 +16,8 @@ include './config/site_css_links.php'
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed">
-    <?php include './config/sidebar.php' ?>
-
+    <?php include './config/sidebar.php';
+    include './config/header.php';  ?>
     <div class="wrapper">
         <div class="content-wrapper">
             <section class="content-header">
@@ -29,71 +28,65 @@ include './config/site_css_links.php'
                         </div>
                     </div>
                 </div>
+
             </section>
-            <form>
-                <fieldset>
-                    <?php
-                echo 
-                "<tr>
-                    <td>";
-                        $host       = "localhost";
-                        $username   = "root";
-                        $password   = "";
-                        $database   = "insertion";
+            <?php
+            echo "<tr>
+            <td>";
+            // your database connection
+            $host       = "localhost";
+            $username   = "root";
+            $password   = "";
+            $database   = "insertion";
 
-                        // select database
-                        $connection = mysqli_connect($host, $username, $password);
-                        mysqli_select_db($connection, "insertion");
+            // select database
+            $connection = mysqli_connect($host, $username, $password);
+            mysqli_select_db($connection, "insertion");
 
-                        $query = ("SELECT * FROM addtable");
-                        $result = mysqli_query($connection, $query);
-                        echo "<div class='container'><table width='' class='table table-bordered' border='1' >
-                                    <tr>
-                                        <th>Staff</th>
-                                        <th>Start time</th>
-                                        <th>End time</th>
-                                        <th>Action</th>
-                                    </tr>";
-                        while ($row = mysqli_fetch_array($result)) {
-                            echo "<tr>";
-                            echo "<td>" . $row['faculty'] . "</td>";
-                            echo "<td>" . $row['start_time'] . "</td>";
-                            echo "<td>" . $row['end_time'] . "</td>";
-                            echo "<td><form class='form-horizontal' method='post' action='tablelist.php'>
-                                <input name='id' type='hidden' value='" . $row['id'] . "';>
-                                <input type='submit' class='btn btn-danger' name='delete' value='Delete'>
-                                </form></td>";
-                            echo "</tr>";
-                        }
-                        echo "</table>";
+            $query = ("SELECT * FROM addtable");
+            $result = mysqli_query($connection, $query);
+            echo "<div class='card card-outline card-primary rounded-0 shadow'>
+                    <table class='table table-bordered'>
+                            <tr>
+                                <th>Staff</th>
+								<th>Start time</th>
+								<th>End time</th>
+                                <th>Action</th>
+                            </tr>";
+            while ($row = mysqli_fetch_array($result)) {
+                echo "<tr>";
+                echo "<td>" . $row['faculty'] . "</td>";
+                echo "<td>" . $row['start_time'] . "</td>";
+                echo "<td>" . $row['end_time'] . "</td>";
+                echo "<td><form class='form-horizontal' method='post' action='tablelist.php'>
+                        <input name='id' type='hidden' value='" . $row['id'] . "';>
+                        <input type='submit' class='btn btn-primary' name='delete' value='Delete'>
+                        </form></td>";
+                echo "</tr>";
+            }
+            echo "</table>";
 
-                        echo "</td>           
-                </tr>";
+            echo "</td>           
+        </tr>";
 
-                if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                    echo '<script type="text/javascript">
+            // delete record
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                echo '<script type="text/javascript">
                       alert("Schedule Successfuly Deleted");
-                        location="tablelist.php";
-                        </script>';
-                }
-                if (isset($_POST['id'])) {
-                    $id = $_POST['id'];
-                    $sql = mysqli_query($connection, "DELETE FROM addtable WHERE id='$id'");
-                }
-                ?>
-                </fieldset>
-                <div align="center">
-                    <br>
-                    <a href="home.php"><input type='submit' class='btn btn-success' name='delete' value='New'></a>
-                    <a href="Index.php"><input type='submit' class='btn btn-primary' name='delete' value='Logout'></a>
-                </div>
+                         location="tablelist.php";
+                           </script>';
+            }
+            if (isset($_POST['id'])) {
+                $id = $_POST['id'];
+                $sql = mysqli_query($connection, "DELETE FROM addtable WHERE id='$id'");
+            }
+            ?>
+            </fieldset>
             </form>
-
         </div>
-
     </div>
     </div>
-
+    </div>
 </body>
 
 </html>

@@ -1,8 +1,6 @@
 <footer class="main-footer fixed-bottom">
-  <strong>Copyright &copy; <?php echo date('Y'); ?>
-    <a href="./">VET Clinical Information System</a>.</strong> All rights reserved.
+  <strong> </strong>
   <div class="float-right d-sm-block">
-    PHP - VCIS Version 2.0
   </div>
 </footer>
 

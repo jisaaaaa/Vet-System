@@ -20,14 +20,15 @@ include './config/site_js_links.php';
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed">
-    <?php include './config/sidebar.php' ?>
+    <?php include './config/sidebar.php';
+    include './config/header.php'; ?>
     <div class="wrapper">
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Set Staff</h1>
+                            <h1>Staff</h1>
                         </div>
                     </div>
                 </div>
@@ -51,17 +52,15 @@ include './config/site_js_links.php';
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="falname">Staff Name</label>
                                     <div class="col-md-5">
-                                        <input id="falname" name="falname" type="text" placeholder="Staff Name"
-                                            class="form-control input-md" required>
+                                        <input id="falname" name="falname" type="text" placeholder="Staff Name" class="form-control input-md" required>
 
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="Designation">Designation</label>
+                                    <label class="col-md-4 control-label" for="Designation">Last Name</label>
                                     <div class="col-md-5">
-                                        <input id="Designation" name="Designation" type="text" placeholder="Designation"
-                                            class="form-control input-md" required>
+                                        <input id="Designation" name="Designation" type="text" placeholder="Last Name" class="form-control input-md" required>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>

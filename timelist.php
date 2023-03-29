@@ -1,34 +1,13 @@
-<?php
-include_once("header.php");
-?>
 <html>
 
 <head>
     <style>
-        body {
-            background-image: url();
-            background-color: white;
-        }
 
-        th {
-            text-align: center;
-        }
-
-        tr {
-            height: 30px;
-        }
-
-        td {
-            padding-top: 5px;
-            padding-left: 20px;
-            padding-bottom: 5px;
-            height: 20px;
-        }
     </style>
 </head>
 
-<body><br>
-    <div class="container">
+<body>
+    <div class="card card-outline card-primary rounded-0 shadow">
 
         <body>
             <?php
@@ -46,7 +25,8 @@ include_once("header.php");
 
             $query = ("SELECT * FROM timer");
             $result = mysqli_query($connection, $query);
-            echo "<div class='container'><table width='' class='table table-bordered' border='1' >
+            echo "<div>
+            <table class='table table-bordered'>
                             <tr>
                              <th>Start time</th>
 								             <th>End time</th>
@@ -56,9 +36,9 @@ include_once("header.php");
                 echo "<tr>";
                 echo "<td>" . $row['start_time'] . "</td>";
                 echo "<td>" . $row['end_time'] . "</td>";
-                echo "<td><form class='form-horizontal' method='post' action='timelist.php'>
+                echo "<td><form method='post' action='timelist.php'>
                         <input name='id' type='hidden' value='" . $row['id'] . "';>
-                        <input type='submit' class='btn btn-danger' name='delete' value='Delete'>
+                        <input type='submit' class='btn btn-primary' name='delete' value='Delete'>
                         </form></td>";
                 echo "</tr>";
             }
@@ -88,10 +68,3 @@ include_once("header.php");
 </body>
 
 </html>
-
-<?php
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path .= "footer.php";
-include_once("footer.php");
-
-?>
