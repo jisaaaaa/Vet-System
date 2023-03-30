@@ -79,7 +79,7 @@ where `user_name` = '$userName' and
     <!-- /.login-logo -->
     <div class="card card-outline card-primary rounded-0 shadow">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Please enter your login credentials</p>
+        <p class="login-box-msg">Please Login</p>
         <form method="post">
           <div class="input-group mb-3">
             <input type="text" class="form-control form-control-lg rounded-0 autofocus" placeholder="Username" id="user_name" name="user_name">

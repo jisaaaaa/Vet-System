@@ -2,7 +2,8 @@
 
 require('fpdf182/fpdf.php');
 
-class LB_PDF extends FPDF {
+class LB_PDF extends FPDF
+{
 
     const COL_HDR_COLOR = 100;
     const ROW_FILL_COLOR = 200;
@@ -20,8 +21,8 @@ class LB_PDF extends FPDF {
 
     protected $widths;
     protected $aligns;
-    protected $tblHdrWidths;//only used when pagebreak is needed.
-    protected $tblHdrAligns;//only used when pagebreak is needed.
+    protected $tblHdrWidths; //only used when pagebreak is needed.
+    protected $tblHdrAligns; //only used when pagebreak is needed.
     protected $colsWithoutSpan1;
     protected $colsWithSpan1;
     protected $colsWithoutSpan2;
@@ -33,7 +34,8 @@ class LB_PDF extends FPDF {
     protected $colsWithoutSpan5;
     protected $colsWithSpan5;
 
-    public function __construct($orientation = 'P', $pageHeaderRepeat = false, $reportTitle = 'Report', $fromDate = '', $toDate = '', $isFooterRequired = true) {
+    public function __construct($orientation = 'P', $pageHeaderRepeat = false, $reportTitle = 'Report', $fromDate = '', $toDate = '', $isFooterRequired = true)
+    {
 
         parent::__construct($orientation, 'mm', 'A4');
         $this->pageHeaderRepeat = $pageHeaderRepeat;
@@ -48,7 +50,8 @@ class LB_PDF extends FPDF {
         $this->SetDrawColor(0);
     }
 
-    public function resetTableHeaders() {
+    public function resetTableHeaders()
+    {
         $this->colsWithoutSpan1 = array();
         $this->colsWithSpan1 = array();
         $this->colsWithoutSpan2 = array();
@@ -60,12 +63,13 @@ class LB_PDF extends FPDF {
         $this->colsWithoutSpan5 = array();
         $this->colsWithSpan5 = array();
     }
-    
-    public function AddTableCaption($tableCaption) {
+
+    public function AddTableCaption($tableCaption)
+    {
         $this->resetTableHeaders();
         //if caption and header(single or double height) and 
         //first row can be displayed
-        $this->CheckPageBreak(self::CAPTION_SIZE + self::LINE_HEIGHT*3);
+        $this->CheckPageBreak(self::CAPTION_SIZE + self::LINE_HEIGHT * 3);
         $this->SetFont('', 'B', self::BODY_SIZE + 1);
         $this->Cell(0, self::CAPTION_SIZE, $tableCaption, 0, 0, 'L');
         $this->SetFont('', '', self::BODY_SIZE);
@@ -73,15 +77,21 @@ class LB_PDF extends FPDF {
     }
 
     public function AddTableHeader(
-            $colsWithoutSpan1, $colsWithSpan1 = array(), 
-            $colsWithoutSpan2 = array(), $colsWithSpan2 = array(), 
-            $colsWithoutSpan3 = array(), $colsWithSpan3 = array(), 
-            $colsWithoutSpan4 = array(), $colsWithSpan4 = array(), 
-            $colsWithoutSpan5 = array(), $colsWithSpan5 = array()) {
+        $colsWithoutSpan1,
+        $colsWithSpan1 = array(),
+        $colsWithoutSpan2 = array(),
+        $colsWithSpan2 = array(),
+        $colsWithoutSpan3 = array(),
+        $colsWithSpan3 = array(),
+        $colsWithoutSpan4 = array(),
+        $colsWithSpan4 = array(),
+        $colsWithoutSpan5 = array(),
+        $colsWithSpan5 = array()
+    ) {
 
         //if header and first row can be displayed
-        $this->CheckPageBreak(self::LINE_HEIGHT*3);
-        
+        $this->CheckPageBreak(self::LINE_HEIGHT * 3);
+
         $this->colsWithoutSpan1 = $colsWithoutSpan1;
         $this->colsWithSpan1 = $colsWithSpan1;
         $this->colsWithoutSpan2 = $colsWithoutSpan2;
@@ -99,7 +109,7 @@ class LB_PDF extends FPDF {
 
         //if no column needs a colspan
         if (count($this->colsWithSpan1) == 0) {
-            if(isset($this->colsWithoutSpan1) && count($this->colsWithoutSpan1) > 0) {
+            if (isset($this->colsWithoutSpan1) && count($this->colsWithoutSpan1) > 0) {
                 $this->AddRow($this->colsWithoutSpan1, true, false, true);
             }
         } else {
@@ -127,7 +137,8 @@ class LB_PDF extends FPDF {
         $this->tblHdrAligns = $this->aligns;
     }
 
-    public function AddRow($data, $drawBorder = true, $fillRow = false, $isHeaderRow = false) {
+    public function AddRow($data, $drawBorder = true, $fillRow = false, $isHeaderRow = false)
+    {
         //Calculate the height of the row
         $nb = 0;
         for ($i = 0; $i < count($data); $i++) {
@@ -157,15 +168,17 @@ class LB_PDF extends FPDF {
         //Go to the next line
         $this->Ln($h);
     }
-    
-    public function addLineSeparator() {
+
+    public function addLineSeparator()
+    {
         $this->Ln(2);
         $this->Cell(0, 0.5, '', 'B', 1);
         $this->Ln(2);
     }
 
     // Page header
-    public function Header() {
+    public function Header()
+    {
         if ($this->pageHeaderRepeat || (!$this->pageHeaderRepeat && !$this->pageHeaderAdded)) {
             // Logo
             $this->Image('dist/img/logoo.png', $this->GetX(), $this->GetY(), 30);
@@ -178,9 +191,9 @@ class LB_PDF extends FPDF {
             $this->Ln();
             if ($this->fromDate != '' || $this->toDate != '') {
                 if ($this->fromDate != '' && $this->toDate != '') {
-                $this->Cell(0, 7, 'From ' . $this->fromDate . '  to  ' . $this->toDate, 0, 0, 'C');
-                } else if($this->fromDate != '') {
-                    $this->Cell(0, 7,  $this->fromDate , 0, 0, 'C');
+                    $this->Cell(0, 7, 'From ' . $this->fromDate . '  to  ' . $this->toDate, 0, 0, 'C');
+                } else if ($this->fromDate != '') {
+                    $this->Cell(0, 7,  $this->fromDate, 0, 0, 'C');
                 }
             }
             // Line break.
@@ -192,7 +205,8 @@ class LB_PDF extends FPDF {
     }
 
     // Page footer
-    public function Footer() {
+    public function Footer()
+    {
         if ($this->isFooterRequired) {
             // Position at 1.0 cm from bottom
             $this->SetY(-11);
@@ -203,37 +217,46 @@ class LB_PDF extends FPDF {
         }
     }
 
-    public function SetWidths($w) {
+    public function SetWidths($w)
+    {
         //Set the array of column widths
         $this->widths = $w;
     }
 
-    public function SetAligns($a) {
+    public function SetAligns($a)
+    {
         //Set the array of column alignments for table headers
         $this->aligns = $a;
     }
 
-    private function CheckPageBreak($h) {
+    private function CheckPageBreak($h)
+    {
         //If the height h would cause an overflow, add a new page immediately
         if ($this->GetY() + $h > $this->PageBreakTrigger) {
 
             $this->AddPage($this->CurOrientation);
-            
+
             $currentWidths = $this->widths;
             $currentAligns = $this->aligns;
             $this->widths = $this->tblHdrWidths;
             $this->aligns = $this->tblHdrAligns;
             $this->AddTableHeader(
-                    $this->colsWithoutSpan1, $this->colsWithSpan1, 
-                    $this->colsWithoutSpan2, $this->colsWithSpan2, 
-                    $this->colsWithoutSpan3, $this->colsWithSpan3, 
-                    $this->colsWithoutSpan4, $this->colsWithSpan4);
+                $this->colsWithoutSpan1,
+                $this->colsWithSpan1,
+                $this->colsWithoutSpan2,
+                $this->colsWithSpan2,
+                $this->colsWithoutSpan3,
+                $this->colsWithSpan3,
+                $this->colsWithoutSpan4,
+                $this->colsWithSpan4
+            );
             $this->widths = $currentWidths;
             $this->aligns = $currentAligns;
         }
     }
 
-    private function NbLines($w, $txt) {
+    private function NbLines($w, $txt)
+    {
         //Computes the number of lines a MultiCell of width w will take
         $cw = &$this->CurrentFont['cw'];
         if ($w == 0) {
@@ -283,7 +306,8 @@ class LB_PDF extends FPDF {
         return $nl;
     }
 
-    private function AddTableHeaderCells($colIndex, $cols, $spannedCols) {
+    private function AddTableHeaderCells($colIndex, $cols, $spannedCols)
+    {
         for ($i = 0; $i < count($cols); $i++) {
             $this->AddHdrCell($this->widths[$colIndex], self::LINE_HEIGHT * 2, $cols[$i], $this->aligns[$colIndex]);
             $colIndex++;
@@ -305,11 +329,12 @@ class LB_PDF extends FPDF {
             $this->SetXY($this->GetX(), $this->GetY() - self::LINE_HEIGHT);
         }
     }
-    
-    private function AddHdrCell($width, $height, $text, $align) {
+
+    private function AddHdrCell($width, $height, $text, $align)
+    {
         //Calculate the height of the row
         $textHeight = self::LINE_HEIGHT;
-        if($height > self::LINE_HEIGHT && $this->NbLines($width, $text) == 1) {
+        if ($height > self::LINE_HEIGHT && $this->NbLines($width, $text) == 1) {
             $textHeight = $height;
         }
         //Save the current position
@@ -321,6 +346,4 @@ class LB_PDF extends FPDF {
         //Put the position to the right of the cell
         $this->SetXY($x + $width, $y);
     }
-    
 }
-?>

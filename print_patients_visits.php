@@ -54,4 +54,3 @@ while($r = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 }
 $pdf->Output('print_patient_visits.pdf', 'I');
-?>

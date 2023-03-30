@@ -1,16 +1,16 @@
-<?php 
+<?php
 include './config/connection.php';
 
-  $date = date('Y-m-d');
-  
-  $year =  date('Y'); 
-  $month =  date('m');
+$date = date('Y-m-d');
 
-  $queryToday = "SELECT count(*) as `today` 
+$year =  date('Y');
+$month =  date('m');
+
+$queryToday = "SELECT count(*) as `today` 
   from `patient_visits` 
   where `visit_date` = '$date';";
 
-  $queryWeek = "SELECT count(*) as `week` 
+$queryWeek = "SELECT count(*) as `week` 
   from `patient_visits` 
   where YEARWEEK(`visit_date`) = YEARWEEK('$date');";
 
@@ -23,13 +23,13 @@ $queryMonth = "SELECT count(*) as `month`
   where YEAR(`visit_date`) = $year and 
   MONTH(`visit_date`) = $month;";
 
-  $todaysCount = 0;
-  $currentWeekCount = 0;
-  $currentMonthCount = 0;
-  $currentYearCount = 0;
+$todaysCount = 0;
+$currentWeekCount = 0;
+$currentMonthCount = 0;
+$currentYearCount = 0;
 
 
-  try {
+try {
 
     $stmtToday = $con->prepare($queryToday);
     $stmtToday->execute();
@@ -50,25 +50,24 @@ $queryMonth = "SELECT count(*) as `month`
     $stmtMonth->execute();
     $r = $stmtMonth->fetch(PDO::FETCH_ASSOC);
     $currentMonthCount = $r['month'];
-
-  } catch(PDOException $ex) {
-     echo $ex->getMessage();
-   echo $ex->getTraceAsString();
-   exit;
-  }
+} catch (PDOException $ex) {
+    echo $ex->getMessage();
+    echo $ex->getTraceAsString();
+    exit;
+}
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include './config/site_css_links.php';?>
+    <?php include './config/site_css_links.php'; ?>
     <title>Dashboard - VET Clinical Information System in PHP</title>
     <style>
-    .dark-mode .bg-fuchsia,
-    .dark-mode .bg-maroon {
-        color: #fff !important;
-    }
+        .dark-mode .bg-fuchsia,
+        .dark-mode .bg-maroon {
+            color: #fff !important;
+        }
     </style>
 </head>
 
@@ -77,11 +76,11 @@ $queryMonth = "SELECT count(*) as `month`
     <div class="wrapper">
         <!-- Navbar -->
 
-        <?php 
+        <?php
 
-include './config/header.php';
-include './config/sidebar.php';
-?>
+        include './config/header.php';
+        include './config/sidebar.php';
+        ?>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -104,7 +103,7 @@ include './config/sidebar.php';
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3><?php echo $todaysCount;?></h3>
+                                    <h3><?php echo $todaysCount; ?></h3>
 
                                     <p>Today's Patients</p>
                                 </div>
@@ -118,7 +117,7 @@ include './config/sidebar.php';
                             <!-- small box -->
                             <div class="small-box bg-purple">
                                 <div class="inner">
-                                    <h3><?php echo $currentWeekCount;?></h3>
+                                    <h3><?php echo $currentWeekCount; ?></h3>
 
                                     <p>Current Week</p>
                                 </div>
@@ -132,7 +131,7 @@ include './config/sidebar.php';
                             <!-- small box -->
                             <div class="small-box bg-fuchsia text-reset">
                                 <div class="inner">
-                                    <h3><?php echo $currentMonthCount;?></h3>
+                                    <h3><?php echo $currentMonthCount; ?></h3>
 
                                     <p>Current Month</p>
                                 </div>
@@ -147,7 +146,7 @@ include './config/sidebar.php';
                             <!-- small box -->
                             <div class="small-box bg-maroon text-reset">
                                 <div class="inner">
-                                    <h3><?php echo $currentYearCount;?></h3>
+                                    <h3><?php echo $currentYearCount; ?></h3>
 
                                     <p>Current Year</p>
                                 </div>
@@ -165,16 +164,16 @@ include './config/sidebar.php';
         </div>
         <!-- /.content-wrapper -->
 
-        <?php include './config/footer.php';?>
+        <?php include './config/footer.php'; ?>
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
-    <?php include './config/site_js_links.php';?>
+    <?php include './config/site_js_links.php'; ?>
     <script>
-    $(function() {
-        showMenuSelected("#mnu_dashboard", "");
-    })
+        $(function() {
+            showMenuSelected("#mnu_dashboard", "");
+        })
     </script>
 
 </body>
