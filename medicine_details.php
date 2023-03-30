@@ -60,7 +60,7 @@ try {
 <head>
   <?php include './config/site_css_links.php'; ?>
   <?php include './config/data_tables_css.php'; ?>
-  <title>Treatment Details - VET Clinical Information System in PHP</title>
+  <title>Treatment Details - VET Clinical Information System</title>
 
 </head>
 

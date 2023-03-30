@@ -181,7 +181,7 @@ class LB_PDF extends FPDF
     {
         if ($this->pageHeaderRepeat || (!$this->pageHeaderRepeat && !$this->pageHeaderAdded)) {
             // Logo
-            $this->Image('dist/img/logoo.png', $this->GetX(), $this->GetY(), 30);
+            $this->Image('dist/img/logo.jpg', $this->GetX(), $this->GetY(), 30);
             // Times bold 13
             $this->SetFont('', 'B', self::HEADING_SIZE);
             // Title

@@ -53,7 +53,7 @@ try {
 
 
   <?php include './config/data_tables_css.php'; ?>
-  <title>Treatment - VET Clinical Information System in PHP</title>
+  <title>Treatment - VET Clinical Information System</title>
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed">
