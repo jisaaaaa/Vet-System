@@ -1,7 +1,7 @@
 <?php
 if (!(isset($_SESSION['user_id']))) {
-  header("location:index.php");
-  exit;
+    header("location:index.php");
+    exit;
 }
 ?>
 <aside class="main-sidebar sidebar-dark-primary bg-black elevation-4">
@@ -13,8 +13,7 @@ if (!(isset($_SESSION['user_id']))) {
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="user_images/<?php echo $_SESSION['profile_picture']; ?>" class="img-circle elevation-2"
-                    alt="User Image" />
+                <img src="user_images/<?php echo $_SESSION['profile_picture']; ?>" class="img-circle elevation-2" alt="User Image" />
             </div>
             <div class="info">
                 <a href="#" class="d-block"><?php echo $_SESSION['display_name']; ?></a>
@@ -174,7 +173,7 @@ if (!(isset($_SESSION['user_id']))) {
                     <a href="users.php" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>
                         <p>
-                            Users
+                            Create Users
                         </p>
                     </a>
                 </li>

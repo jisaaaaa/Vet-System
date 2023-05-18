@@ -47,7 +47,7 @@ function getMedicines($con, $medicineId = 0) {
 		exit;
 	}
 
-	$data = '<option value="">Select Medicine</option>';
+	$data = '<option value="">Select Treatment</option>';
 
 	while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		if($medicineId == $row['id']) {
@@ -108,4 +108,3 @@ data-target="#'.$dateId.'" name="'.$dateId.'" id="'.$dateId.'" required="require
 
           return $d;
 }
-?>
