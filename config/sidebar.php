@@ -48,31 +48,31 @@ if (!(isset($_SESSION['user_id']))) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="home.php" class="nav-link" id="mi_new_prescription">
+                            <a href="home.php" class="nav-link" id="mi_home">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Set Schedule</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="addfaculty.php" class="nav-link" id="mi_patients">
+                            <a href="addfaculty.php" class="nav-link" id="mi_addfaculty">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Staff</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="addtime.php" class="nav-link" id="mi_patient_history">
+                            <a href="addtime.php" class="nav-link" id="mi_addtime">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Time</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="list.php" class="nav-link" id="mi_patient_history">
+                            <a href="list.php" class="nav-link" id="mi_list">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="tablelist.php" class="nav-link" id="mi_patient_history">
+                            <a href="tablelist.php" class="nav-link" id="mi_tablelist">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Schedule</p>
                             </a>
