@@ -73,7 +73,6 @@ where `user_name` = '$userName' and
 <body class="hold-transition login-page dark-mode">
   <div class="login-box">
     <div class="login-logo mb-4">
-      <img src="dist/img/logo.jpg" class="img-thumbnail p-0 border rounded-circle" id="system-logo">
       <div class="text-center h2 mb-0">VET Clinical Information System</div>
     </div>
     <!-- /.login-logo -->
