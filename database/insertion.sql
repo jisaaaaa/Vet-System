@@ -130,13 +130,9 @@ CREATE TABLE IF NOT EXISTS `faculty` (
 --
 
 INSERT INTO `faculty` (`faculty_id`, `faculty_name`, `designation`) VALUES
-(14, 'Engineering', 'CS-OJT Coordinator'),
-(16, 'Information Technology', 'Computer Security'),
-(17, 'Management Studies', 'Elective 3'),
-(19, 'Philosophy', 'Demo2'),
-(20, 'Natural Science', 'Demo3'),
-(21, 'Commerce', 'Demo4');
-
+(14, 'Vencint', 'Maata'),
+(16, 'Jessa', 'Copian'),
+(17, 'Jason', 'Labrada');
 -- --------------------------------------------------------
 
 --

@@ -31,13 +31,18 @@ CREATE TABLE `medicines` (
 --
 
 INSERT INTO `medicines` (`id`, `medicine_name`) VALUES
-(1, 'Amoxicillin'),
-(4, 'Antibiotic'),
-(5, 'Antihistamine'),
-(6, 'Atorvastatin'),
-(3, 'Losartan'),
-(2, 'Mefenamic'),
-(7, 'Oxymetazoline');
+(1, 'Vaccinations'),
+(4, 'Spaying and Neutering'),
+(5, 'Dental Care'),
+(6, 'Internal Medicine'),
+(3, 'External Parasite Control'),
+(2, 'Radiology'),
+(7, 'Laboratory Services');
+(8, 'Pain Management');
+(9, 'Allergy Testing and Treatment');
+(10, 'Behavioral Consultations');
+(11, 'Nutritional Counseling');
+(12, 'Minor Surgeries');
 
 -- --------------------------------------------------------
 
@@ -56,14 +61,18 @@ CREATE TABLE `medicine_details` (
 --
 
 INSERT INTO `medicine_details` (`id`, `medicine_id`, `packing`) VALUES
-(1, 1, '50'),
-(2, 4, '50'),
-(3, 5, '50'),
-(4, 6, '25'),
-(5, 3, '80'),
-(6, 2, '100'),
-(7, 7, '25');
-
+(1, 1, 'Administering core and non-core vaccines to protect pets from common infectious diseases.'),
+(2, 4, 'Surgical procedures to sterilize pets and prevent unwanted pregnancies.'),
+(3, 5, 'cleaning, extractions, and oral health assessments for pets to prevent dental diseases.'),
+(4, 6, 'Diagnosis and treatment of internal health issues, such as gastrointestinal disorders, respiratory problems, and endocrine diseases.'),
+(5, 3, 'Offering treatments for fleas, ticks, mites, and other external parasites that affect pets.'),
+(6, 2, 'Providing X-ray services for diagnostic purposes, including bone fractures, organ evaluation, or foreign body identification.'),
+(7, 7, 'Conducting blood tests, urinalysis, fecal examinations, and other diagnostic tests to assist in the diagnosis of various conditions.');
+(8, 8, 'Offering pain relief options, including medication, physical therapy, and alternative therapies.');
+(9, 9, 'Identifying and managing allergies through testing, dietary recommendations, and medication.');
+(10, 10, 'Assessing and addressing behavioral issues in pets, including anxiety, aggression, or house training problems.');
+(11, 11, 'Providing guidance on proper pet nutrition, diet plans, and weight management.');
+(12, 12, 'Performing minor surgical procedures like wound stitching, abscess drainage, or tumor removal.');
 -- --------------------------------------------------------
 
 --
@@ -166,8 +175,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `display_name`, `user_name`, `password`, `profile_picture`) VALUES
-(1, 'Administrator', 'admin', '0192023a7bbd73250516f069df18b500', '1656551981avatar.png '),
-(2, 'John Doe', 'jdoe', '9c86d448e84d4ba23eb089e0b5160207', '1656551999avatar_.png');
+(1, 'Administrator', 'admin', '0192023a7bbd73250516f069df18b500', '1656551981avatar.png ');
 
 --
 -- Indexes for dumped tables
