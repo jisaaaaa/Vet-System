@@ -4,7 +4,7 @@
  
  if (!$con)
  {
-	 echo 'Error: Not connected to server';
+	 echo 'Error: Not connected to the server';
  }
  if (!mysqli_select_db($con, 'insertion'))
  {
