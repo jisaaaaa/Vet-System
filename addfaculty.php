@@ -1,11 +1,57 @@
 <?php
-include './config/connection.php';
-include './common_service/common_functions.php';
-include './config/site_js_links.php';
+session_start(); // Start the session
+
+$phoneNumber = ""; // Initialize the variable to hold the phone number
+
+// Check if the form has been submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['phone_number'])) {
+    // Sanitize and store the phone number in the session variable
+    $_SESSION['phone_number'] = sanitize($_POST['phone_number']);
+    $phoneNumber = $_SESSION['phone_number']; // Update the phone number variable for immediate display
+
+    // Your code to insert the staff data into the database goes here
+    // Make sure to properly insert the phone number into the database
+
+    // Example: Inserting the phone number into the database
+    $host = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "insertion";
+
+    // Create a database connection
+    $connection = mysqli_connect($host, $username, $password, $database);
+
+    // Check if the connection is successful
+    if (!$connection) {
+        die("Database connection failed: " . mysqli_connect_error());
+    }
+
+    // Prepare the phone number for insertion (you can use prepared statements for security)
+    $phoneToInsert = mysqli_real_escape_string($connection, $phoneNumber);
+
+    // SQL query to insert the phone number into a table named "phone_numbers"
+    $insertQuery = "INSERT INTO phone_numbers (phone_number) VALUES ('$phoneToInsert')";
+
+    // Perform the SQL query
+    if (mysqli_query($connection, $insertQuery)) {
+        echo "Phone number inserted into the database successfully.";
+    } else {
+        echo "Error: " . mysqli_error($connection);
+    }
+
+    // Close the database connection
+    mysqli_close($connection);
+}
+
+// Define the function to sanitize input
+function sanitize($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +99,6 @@ include './config/site_js_links.php';
                                     <label class="col-md-4 control-label" for="falname">Staff Name</label>
                                     <div class="col-md-5">
                                         <input id="falname" name="falname" type="text" placeholder="Staff Name" class="form-control input-md" required>
-
                                     </div>
                                 </div>
 
@@ -61,7 +106,14 @@ include './config/site_js_links.php';
                                     <label class="col-md-4 control-label" for="Designation">Last Name</label>
                                     <div class="col-md-5">
                                         <input id="Designation" name="Designation" type="text" placeholder="Last Name" class="form-control input-md" required>
-                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Add the "Phone Number" input field -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="phone_number">Phone Number</label>
+                                    <div class="col-md-5">
+                                        <input id="phone_number" name="phone_number" type="text" placeholder="Phone Number" class="form-control input-md" required>
                                     </div>
                                 </div>
 
@@ -71,19 +123,13 @@ include './config/site_js_links.php';
                                         <button id="submit" name="submit" class="btn btn-primary">Add Staff</button>
                                     </div>
                                 </div>
-
                             </fieldset>
                         </form>
-
-
-
                     </div>
                 </div>
             </section>
         </div>
     </div>
-
-
 
     <script src="plugins/moment/moment.min.js"></script>
     <script src="plugins/daterangepicker/daterangepicker.js"></script>

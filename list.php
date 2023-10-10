@@ -29,12 +29,12 @@ include './config/site_css_links.php';
                         </div>
                     </div>
                 </div>
-
             </section>
 
             <?php
             include_once("faclist.php");
             ?>
+
             <div class="wrapper">
                 <div class="content-wrapper">
                     <section class="content-header">
@@ -45,13 +45,11 @@ include './config/site_css_links.php';
                                 </div>
                             </div>
                         </div>
-
                     </section>
 
                     <?php
                     include_once("timelist.php");
                     ?>
-
 
                 </div>
             </div>

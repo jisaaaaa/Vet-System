@@ -37,12 +37,12 @@ INSERT INTO `medicines` (`id`, `medicine_name`) VALUES
 (6, 'Internal Medicine'),
 (3, 'External Parasite Control'),
 (2, 'Radiology'),
-(7, 'Laboratory Services');
-(8, 'Pain Management');
-(9, 'Allergy Testing and Treatment');
-(10, 'Behavioral Consultations');
-(11, 'Nutritional Counseling');
-(12, 'Minor Surgeries');
+(7, 'Laboratory Services'),
+(8, 'Pain Management'),  -- Added missing semicolon
+(9, 'Allergy Testing and Treatment'),  -- Added missing semicolon
+(10, 'Behavioral Consultations'),  -- Added missing semicolon
+(11, 'Nutritional Counseling'),  -- Added missing semicolon
+(12, 'Minor Surgeries');  -- Added missing semicolon
 
 -- --------------------------------------------------------
 
@@ -67,12 +67,12 @@ INSERT INTO `medicine_details` (`id`, `medicine_id`, `packing`) VALUES
 (4, 6, 'Diagnosis and treatment of internal health issues, such as gastrointestinal disorders, respiratory problems, and endocrine diseases.'),
 (5, 3, 'Offering treatments for fleas, ticks, mites, and other external parasites that affect pets.'),
 (6, 2, 'Providing X-ray services for diagnostic purposes, including bone fractures, organ evaluation, or foreign body identification.'),
-(7, 7, 'Conducting blood tests, urinalysis, fecal examinations, and other diagnostic tests to assist in the diagnosis of various conditions.');
-(8, 8, 'Offering pain relief options, including medication, physical therapy, and alternative therapies.');
-(9, 9, 'Identifying and managing allergies through testing, dietary recommendations, and medication.');
-(10, 10, 'Assessing and addressing behavioral issues in pets, including anxiety, aggression, or house training problems.');
-(11, 11, 'Providing guidance on proper pet nutrition, diet plans, and weight management.');
-(12, 12, 'Performing minor surgical procedures like wound stitching, abscess drainage, or tumor removal.');
+(7, 7, 'Conducting blood tests, urinalysis, fecal examinations, and other diagnostic tests to assist in the diagnosis of various conditions.'),
+(8, 8, 'Offering pain relief options, including medication, physical therapy, and alternative therapies.'),  -- Added missing semicolon
+(9, 9, 'Identifying and managing allergies through testing, dietary recommendations, and medication.'),  -- Added missing semicolon
+(10, 10, 'Assessing and addressing behavioral issues in pets, including anxiety, aggression, or house training problems.'),  -- Added missing semicolon
+(11, 11, 'Providing guidance on proper pet nutrition, diet plans, and weight management.'),  -- Added missing semicolon
+(12, 12, 'Performing minor surgical procedures like wound stitching, abscess drainage, or tumor removal.');  -- Added missing semicolon
 -- --------------------------------------------------------
 
 --

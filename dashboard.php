@@ -1,181 +1,89 @@
 <?php
 include './config/connection.php';
-
-$date = date('Y-m-d');
-
-$year =  date('Y');
-$month =  date('m');
-
-$queryToday = "SELECT count(*) as `today` 
-  from `patient_visits` 
-  where `visit_date` = '$date';";
-
-$queryWeek = "SELECT count(*) as `week` 
-  from `patient_visits` 
-  where YEARWEEK(`visit_date`) = YEARWEEK('$date');";
-
-$queryYear = "SELECT count(*) as `year` 
-  from `patient_visits` 
-  where YEAR(`visit_date`) = YEAR('$date');";
-
-$queryMonth = "SELECT count(*) as `month` 
-  from `patient_visits` 
-  where YEAR(`visit_date`) = $year and 
-  MONTH(`visit_date`) = $month;";
-
-$todaysCount = 0;
-$currentWeekCount = 0;
-$currentMonthCount = 0;
-$currentYearCount = 0;
-
-
-try {
-
-    $stmtToday = $con->prepare($queryToday);
-    $stmtToday->execute();
-    $r = $stmtToday->fetch(PDO::FETCH_ASSOC);
-    $todaysCount = $r['today'];
-
-    $stmtWeek = $con->prepare($queryWeek);
-    $stmtWeek->execute();
-    $r = $stmtWeek->fetch(PDO::FETCH_ASSOC);
-    $currentWeekCount = $r['week'];
-
-    $stmtYear = $con->prepare($queryYear);
-    $stmtYear->execute();
-    $r = $stmtYear->fetch(PDO::FETCH_ASSOC);
-    $currentYearCount = $r['year'];
-
-    $stmtMonth = $con->prepare($queryMonth);
-    $stmtMonth->execute();
-    $r = $stmtMonth->fetch(PDO::FETCH_ASSOC);
-    $currentMonthCount = $r['month'];
-} catch (PDOException $ex) {
-    echo $ex->getMessage();
-    echo $ex->getTraceAsString();
-    exit;
-}
-
+include './common_service/common_functions.php';
+include './config/site_js_links.php';
+include './config/site_css_links.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include './config/site_css_links.php'; ?>
-    <title>Dashboard - VET Clinical Information System in PHP</title>
-    <style>
-        .dark-mode .bg-fuchsia,
-        .dark-mode .bg-maroon {
-            color: #fff !important;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <title>Schedules - VET Clinical Information System in PHP</title>
+    <!-- Include any additional CSS or script references specific to this page if needed -->
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed">
-    <!-- Site wrapper -->
+    <?php include './config/sidebar.php';
+    include './config/header.php';  ?>
     <div class="wrapper">
-        <!-- Navbar -->
-
-        <?php
-
-        include './config/header.php';
-        include './config/sidebar.php';
-        ?>
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Dashboard</h1>
-                        </div>
-                    </div>
-                </div><!-- /.container-fluid -->
-            </section>
-
-            <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3><?php echo $todaysCount; ?></h3>
-
-                                    <p>Today's Patients</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-calendar-day"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-purple">
-                                <div class="inner">
-                                    <h3><?php echo $currentWeekCount; ?></h3>
-
-                                    <p>Current Week</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-calendar-week"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-fuchsia text-reset">
-                                <div class="inner">
-                                    <h3><?php echo $currentMonthCount; ?></h3>
-
-                                    <p>Current Month</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-maroon text-reset">
-                                <div class="inner">
-                                    <h3><?php echo $currentYearCount; ?></h3>
-
-                                    <p>Current Year</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-user-injured"></i>
-                                </div>
-
-                            </div>
+                            <h1>Schedules Overview</h1>
                         </div>
                     </div>
                 </div>
             </section>
+            <?php
+            echo "<tr>
+            <td>";
+            // your database connection
+            $host       = "localhost";
+            $username   = "root";
+            $password   = "";
+            $database   = "insertion";
 
-            <!-- /.content -->
+            // select database
+            $connection = mysqli_connect($host, $username, $password);
+            mysqli_select_db($connection, "insertion");
+
+            $query = ("SELECT * FROM addtable");
+            $result = mysqli_query($connection, $query);
+            echo "<div class='card card-outline card-primary rounded-0 shadow'>
+                    <table class='table table-bordered'>
+                            <tr>
+                                <th>Staff</th>
+                                <th>Start time</th>
+                                <th>End time</th>
+                                <th>Action</th>
+                            </tr>";
+            while ($row = mysqli_fetch_array($result)) {
+                echo "<tr>";
+                echo "<td>" . $row['faculty'] . "</td>";
+                echo "<td>" . $row['start_time'] . "</td>";
+                echo "<td>" . $row['end_time'] . "</td>";
+                echo "<td><form class='form-horizontal' method='post' action='tablelist.php'>
+                        <input name='id' type='hidden' value='" . $row['id'] . "';>
+                        <input type='submit' class='btn btn-primary' name='delete' value='Delete'>
+                        </form></td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+            echo "</td></tr>";
+
+            // delete record
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                echo '<script type="text/javascript">
+                      alert("Schedule Successfully Deleted");
+                      location="tablelist.php";
+                      </script>';
+            }
+            if (isset($_POST['id'])) {
+                $id = $_POST['id'];
+                $sql = mysqli_query($connection, "DELETE FROM addtable WHERE id='$id'");
+            }
+            ?>
+            </fieldset>
+            </form>
         </div>
-        <!-- /.content-wrapper -->
-
-        <?php include './config/footer.php'; ?>
-        <!-- /.control-sidebar -->
     </div>
-    <!-- ./wrapper -->
-
-    <?php include './config/site_js_links.php'; ?>
-    <script>
-        $(function() {
-            showMenuSelected("#mnu_dashboard", "");
-        })
-    </script>
-
+    </div>
 </body>
 
 </html>
